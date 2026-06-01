@@ -68,14 +68,9 @@ resource "aws_ec2_transit_gateway_route_table_association" "production" {
   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.production.id
 }
 
-# ── 3.5 TGW Route Propagation ─────────────────────────────────
-
-# Propagate VPC Production routes into TGW-RT-OnPremise
-# This auto-installs the Production VPC CIDR so hospitals can reach it
-resource "aws_ec2_transit_gateway_route_table_propagation" "prod_to_onpremise" {
+resource "aws_ec2_transit_gateway_route" "onprem_to_production" {
+  destination_cidr_block         = var.cidr_vpc_prod
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.production.id
   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.onpremise.id
 }
 
-# RT-Production: hospital routes are propagated from VPN attachments
-# (handled in vpn_site_to_site module)

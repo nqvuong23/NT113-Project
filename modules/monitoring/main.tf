@@ -6,7 +6,7 @@
 
 # ── 16.2 CloudWatch Log Groups ────────────────────────────────
 resource "aws_cloudwatch_log_group" "vpc_flowlogs_production" {
-  name              = "/hospital/vpc-flowlogs/production"
+  name              = "/hospital/vpc-flowlogs/production-v2"
   retention_in_days = var.flowlogs_retention_days
   kms_key_id        = var.kms_key_general_arn
 
@@ -18,7 +18,7 @@ resource "aws_cloudwatch_log_group" "vpc_flowlogs_production" {
 }
 
 resource "aws_cloudwatch_log_group" "vpc_flowlogs_onpremise_1" {
-  name              = "/hospital/vpc-flowlogs/onpremise-1"
+  name              = "/hospital/vpc-flowlogs/onpremise-1-v2"
   retention_in_days = 30
   kms_key_id        = var.kms_key_general_arn
 
@@ -30,7 +30,7 @@ resource "aws_cloudwatch_log_group" "vpc_flowlogs_onpremise_1" {
 }
 
 resource "aws_cloudwatch_log_group" "vpc_flowlogs_onpremise_2" {
-  name              = "/hospital/vpc-flowlogs/onpremise-2"
+  name              = "/hospital/vpc-flowlogs/onpremise-2-v2"
   retention_in_days = 30
   kms_key_id        = var.kms_key_general_arn
 
@@ -42,7 +42,7 @@ resource "aws_cloudwatch_log_group" "vpc_flowlogs_onpremise_2" {
 }
 
 resource "aws_cloudwatch_log_group" "cloudtrail" {
-  name              = "/hospital/cloudtrail"
+  name              = "/hospital/cloudtrail-v2"
   retention_in_days = var.cloudtrail_log_retention_days
   kms_key_id        = var.kms_key_general_arn
 
@@ -54,7 +54,7 @@ resource "aws_cloudwatch_log_group" "cloudtrail" {
 }
 
 resource "aws_cloudwatch_log_group" "appserver" {
-  name              = "/hospital/ec2/appserver"
+  name              = "/hospital/ec2/appserver-v2"
   retention_in_days = var.appserver_log_retention_days
   kms_key_id        = var.kms_key_general_arn
 

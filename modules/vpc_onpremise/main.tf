@@ -63,8 +63,8 @@ resource "aws_subnet" "onpremise_private" {
     "Workstation-1" = { cidr = var.workstation_subnet_cidr_onprem_1, vpc_key = "1" }
     "IOT-1" = { cidr = var.iot_subnet_cidr_onprem_1, vpc_key = "1" }
     "Wifi-1" = { cidr = var.wifi_subnet_cidr_onprem_1, vpc_key = "1" }
-    "Workstation-2" = { cidr = var.workstation_subnet_cidr_onprem_1, vpc_key = "2" }
-    "IOT-2" = { cidr = var.iot_subnet_cidr_onprem_1, vpc_key = "2" }
+    "Workstation-2" = { cidr = var.workstation_subnet_cidr_onprem_2, vpc_key = "2" }
+    "IOT-2" = { cidr = var.iot_subnet_cidr_onprem_2, vpc_key = "2" }
     "Wifi-2" = { cidr = var.wifi_subnet_cidr_onprem_2, vpc_key = "2" }
   }
 

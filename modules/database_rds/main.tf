@@ -23,7 +23,7 @@ resource "aws_db_parameter_group" "hospital" {
 
 # ── 12.3 Secrets Manager – DB Credentials ────────────────────
 resource "aws_secretsmanager_secret" "db_credentials" {
-  name        = "hospital/prod/db-credentials"
+  name        = "hospital/prod/db-credentials-v2"
   kms_key_id  = var.kms_key_rds_arn
   description = "Hospital Production RDS master credentials"
 

@@ -179,12 +179,15 @@ module "security_groups" {
 module "transit_gateway" {
   source = "./modules/transit_gateway"
 
-  project_name            = var.project_name
-  environment             = var.environment
-  tgw_amazon_side_asn     = 64512
-  vpc_production_id       = module.vpc_production.vpc_id
-  subnet_prod_tgw_az_a_id = module.vpc_production.subnet_tgw_az_a_id
-  subnet_prod_tgw_az_b_id = module.vpc_production.subnet_tgw_az_b_id
+  project_name                   = var.project_name
+  environment                    = var.environment
+  tgw_amazon_side_asn            = 64512
+  vpc_production_id              = module.vpc_production.vpc_id
+  subnet_prod_tgw_az_a_id        = module.vpc_production.subnet_tgw_az_a_id
+  subnet_prod_tgw_az_b_id        = module.vpc_production.subnet_tgw_az_b_id
+  cidr_onprem_1                  = var.vpc_cidr_onprem_1
+  cidr_onprem_2                  = var.vpc_cidr_onprem_2
+  cidr_vpc_prod = var.vpc_cidr_prod
 
   depends_on = [module.vpc_production]
 }
@@ -237,16 +240,19 @@ module "compute_ec2" {
 module "vpn_site_to_site" {
   source = "./modules/vpn_site_to_site"
 
-  project_name          = var.project_name
-  environment           = var.environment
-  tgw_id                = module.transit_gateway.tgw_id
-  tgw_rt_onpremise_id   = module.transit_gateway.tgw_rt_onpremise_id
-  tgw_rt_production_id  = module.transit_gateway.tgw_rt_production_id
+  project_name = var.project_name
+  environment  = var.environment
+
+  tgw_id               = module.transit_gateway.tgw_id
+  tgw_rt_onpremise_id  = module.transit_gateway.tgw_rt_onpremise_id
+  tgw_rt_production_id = module.transit_gateway.tgw_rt_production_id
+
   onprem_eip_public_ips = module.vpc_onpremise.eip_public_ips
-  cgw_bgp_asn_1         = 65001
-  cgw_bgp_asn_2         = 65002
-  cidr_onprem_1         = var.vpc_cidr_onprem_1
-  cidr_onprem_2         = var.vpc_cidr_onprem_2
+
+  cgw_bgp_asn_1 = 65001
+  cgw_bgp_asn_2 = 65002
+  cidr_onprem_1 = var.vpc_cidr_onprem_1
+  cidr_onprem_2 = var.vpc_cidr_onprem_2
 
   depends_on = [module.transit_gateway, module.compute_ec2]
 }

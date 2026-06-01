@@ -28,3 +28,16 @@ variable "subnet_prod_tgw_az_b_id" {
   type        = string
 }
 
+variable "cidr_onprem_1" {
+  description = "CIDR block for Hospital 1"
+  type        = string
+}
+
+variable "cidr_onprem_2" {
+  description = "CIDR block for Hospital 2"
+  type        = string
+}
+
+variable "cidr_vpc_prod" {
+  type = string
+}

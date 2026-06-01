@@ -25,7 +25,7 @@ resource "aws_route53_zone" "hospital_internal" {
 # his-app.hospital.internal → Internal ALB (ALIAS)
 resource "aws_route53_record" "his_app" {
   zone_id = aws_route53_zone.hospital_internal.zone_id
-  name    = "his-app.${var.private_zone_name}"
+  name    = "app.${var.private_zone_name}"
   type    = "A"
 
   alias {
@@ -46,9 +46,9 @@ resource "aws_route53_record" "db" {
 
 # ── 15.3 Health Check for HIS ALB Endpoint ───────────────────
 resource "aws_route53_health_check" "his_endpoint" {
-  fqdn              = "his-app.${var.private_zone_name}"
-  port              = 443
-  type              = "HTTPS"
+  fqdn              = "app.${var.private_zone_name}"
+  port              = 80
+  type              = "HTTP"
   resource_path     = "/health"
   failure_threshold = 3
   request_interval  = 30
