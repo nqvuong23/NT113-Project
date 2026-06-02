@@ -179,15 +179,15 @@ module "security_groups" {
 module "transit_gateway" {
   source = "./modules/transit_gateway"
 
-  project_name                   = var.project_name
-  environment                    = var.environment
-  tgw_amazon_side_asn            = 64512
-  vpc_production_id              = module.vpc_production.vpc_id
-  subnet_prod_tgw_az_a_id        = module.vpc_production.subnet_tgw_az_a_id
-  subnet_prod_tgw_az_b_id        = module.vpc_production.subnet_tgw_az_b_id
-  cidr_onprem_1                  = var.vpc_cidr_onprem_1
-  cidr_onprem_2                  = var.vpc_cidr_onprem_2
-  cidr_vpc_prod = var.vpc_cidr_prod
+  project_name            = var.project_name
+  environment             = var.environment
+  tgw_amazon_side_asn     = 64512
+  vpc_production_id       = module.vpc_production.vpc_id
+  subnet_prod_tgw_az_a_id = module.vpc_production.subnet_tgw_az_a_id
+  subnet_prod_tgw_az_b_id = module.vpc_production.subnet_tgw_az_b_id
+  cidr_onprem_1           = var.vpc_cidr_onprem_1
+  cidr_onprem_2           = var.vpc_cidr_onprem_2
+  cidr_vpc_prod           = var.vpc_cidr_prod
 
   depends_on = [module.vpc_production]
 }
@@ -330,6 +330,7 @@ module "vpn_client" {
   kms_key_general_arn           = module.kms.kms_key_general_arn
   vpn_log_retention_days        = 90
   vpn_domain                    = "hospital.internal"
+  dns_servers                   = [var.prod_vpc_dns_servers]
 
   depends_on = [module.vpc_production, module.security_groups]
 }

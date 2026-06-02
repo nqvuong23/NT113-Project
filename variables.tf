@@ -163,3 +163,7 @@ variable "alb_certificate_arn" {
   description = "ACM Certificate ARN for internal ALB HTTPS listener"
   type        = string
 }
+
+variable "prod_vpc_dns_servers" {
+  type = string
+}

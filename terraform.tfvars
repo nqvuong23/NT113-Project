@@ -51,6 +51,8 @@ client_vpn_cidr = "10.0.200.0/22"
 admin_email   = "nguyenquocvuong160705@gmail.com"
 admin_ip_cidr = "0.0.0.0/0" # Replace with actual admin IP, e.g. "203.0.113.10/32"
 
+prod_vpc_dns_servers = "10.0.4.2"
+
 # AMI IDs (ap-southeast-1 – update as needed)
 # Ubuntu 22.04 LTS: ami-0df7a207adb9748c7 (example, check AWS Console)
 vpn_ami_ubuntu = "ami-0a56f8447277affd8"

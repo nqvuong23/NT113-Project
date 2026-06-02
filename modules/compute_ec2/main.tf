@@ -24,15 +24,6 @@ resource "aws_instance" "vpn_appliance" {
   source_dest_check      = false # Required – EC2 acts as VPN router
   iam_instance_profile   = var.vpn_appliance_instance_profile
 
-  user_data = <<-EOF
-    #!/bin/bash
-    apt-get update -y
-    apt-get install -y strongswan strongswan-pki libcharon-extra-plugins
-    echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
-    sysctl -p
-    # IPsec config will be configured after TF apply using tunnel addresses from output
-  EOF
-
   tags = {
     Name        = "EC2-VPN-Appliance-Hospital-${each.key}"
     Environment = var.environment
@@ -74,16 +65,6 @@ resource "aws_instance" "app_server" {
     volume_size = 30
     volume_type = "gp3"
   }
-
-  user_data = <<-EOF
-    #!/bin/bash
-    yum update -y
-    yum install -y nginx
-    systemctl enable nginx
-    systemctl start nginx
-    # Mock health endpoint for ALB health check
-    echo "OK" > /usr/share/nginx/html/health
-  EOF
 
   tags = {
     Name        = each.value.name

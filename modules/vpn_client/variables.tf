@@ -57,3 +57,7 @@ variable "vpn_domain" {
   description = "Domain name for VPN certificates (e.g. hospital.internal)"
   type        = string
 }
+
+variable "dns_servers" {
+  type = list(string)
+}

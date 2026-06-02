@@ -140,6 +140,7 @@ resource "aws_ec2_client_vpn_endpoint" "doctor_remote" {
   vpc_id                 = var.vpc_production_id
   security_group_ids     = [var.sg_client_vpn_id]
   split_tunnel           = true # Only AWS traffic goes through VPN
+  dns_servers = var.dns_servers
 
   authentication_options {
     type                       = "certificate-authentication"

@@ -71,8 +71,8 @@ resource "aws_db_instance" "hospital_prod" {
   maintenance_window      = "Mon:04:00-Mon:06:00"
 
   deletion_protection       = false
-  skip_final_snapshot       = false
-  final_snapshot_identifier = "hospital-prod-db-final"
+  skip_final_snapshot       = true
+  # final_snapshot_identifier = "hospital-prod-db-final"
 
   # performance_insights_enabled          = true
   # performance_insights_kms_key_id       = var.kms_key_rds_arn

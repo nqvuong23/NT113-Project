@@ -296,6 +296,17 @@ resource "aws_security_group" "vpc_endpoints" {
 # Security Group Rules (added separately to break cycles)
 # ══════════════════════════════════════════════════════════════
 
+# Ingress from client VPN to ALB
+resource "aws_security_group_rule" "clientvpn_to_alb_80_ingress" {
+  type                     = "ingress"
+  from_port                = 80
+  to_port                  = 80
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.alb_internal.id
+  source_security_group_id = aws_security_group.client_vpn_endpoint.id
+  description              = "HTTPS to App Servers"
+}
+
 # Client VPN → App Server egress (HTTPS)
 resource "aws_security_group_rule" "clientvpn_to_app_https" {
   type                     = "egress"
@@ -324,6 +335,16 @@ resource "aws_security_group_rule" "clientvpn_to_app_8080" {
   protocol                 = "tcp"
   security_group_id        = aws_security_group.client_vpn_endpoint.id
   source_security_group_id = aws_security_group.app_server.id
+  description              = "App port 8080 to App Servers"
+}
+
+resource "aws_security_group_rule" "clientvpn_to_alb_80" {
+  type                     = "egress"
+  from_port                = 80
+  to_port                  = 80
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.client_vpn_endpoint.id
+  source_security_group_id = aws_security_group.alb_internal.id
   description              = "App port 8080 to App Servers"
 }
 
