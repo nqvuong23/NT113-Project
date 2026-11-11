@@ -105,10 +105,10 @@ Máy Workstation BV-1            Phía AWS Cloud
 EC2 VPN Appliance BV-1          │  (Router trung tâm)                 │
 (StrongSwan, IP Public)         │       │                             │
        │                        │       ├──► VPC Production           │
-       │ ◄──── IPsec Tunnel 1 ──┤       │    (Ứng dụng HIS/EMR)      │
+       │ ◄──── IPsec Tunnel 1 ──┤       │    (Ứng dụng HIS/EMR)       │
        │       (Mã hóa IKEv2)   │       │                             │
        │ ◄──── IPsec Tunnel 2 ──┤       │                             │
-       │       (Dự phòng HA)    │  (Tương tự BV-2 qua Tunnel khác)   │
+       │       (Dự phòng HA)    │  (Tương tự BV-2 qua Tunnel khác)    │
                                 └─────────────────────────────────────┘
 ```
 
@@ -177,8 +177,8 @@ VPC Production (10.0.4.0/22)
 
 ```
 VPC Production (10.0.4.0/22) – Trải rộng 2 Availability Zones
-┌──────────────────────────────────────────────────────────────────┐
-│                                                                  │
+┌────────────────────────────────────────────────────────────────┐
+│                                                                │
 │  ┌─── AZ-A ──────────────────┐  ┌─── AZ-B ──────────────────┐  │
 │  │                           │  │                           │  │
 │  │ [TGW Subnet /28]          │  │ [TGW Subnet /28]          │  │
@@ -198,8 +198,8 @@ VPC Production (10.0.4.0/22) – Trải rộng 2 Availability Zones
 │  │  RDS Primary              │  │  RDS Standby (Multi-AZ)   │  │
 │  │                           │  │                           │  │
 │  └───────────────────────────┘  └───────────────────────────┘  │
-│                                                                  │
-└──────────────────────────────────────────────────────────────────┘
+│                                                                │
+└────────────────────────────────────────────────────────────────┘
 ```
 
 #### Phân tích từng tầng Subnet
